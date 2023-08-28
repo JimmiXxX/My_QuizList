@@ -29,7 +29,9 @@ body
 {
     display: flex;
     padding: 15px 80px;
-    border: 1px solid #3d3b33;;
+    border: 1px solid #3d3b33;
+    align-items: center;
+    justify-content: center;
     border-radius: 30px;
 }
 
