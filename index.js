@@ -139,6 +139,13 @@ function showResults() {
     }
 
     let result = `${score} из ${questions.length}`
+
+    const finalMessage =    resultTemplate
+        .replace('%title%', title)
+        .replace('%message%', message)
+        .replace('%result%', result)
+
+        quizAnswer.innerHTML = finalMessage
 }
 
 
