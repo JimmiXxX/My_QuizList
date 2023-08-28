@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Quiz list</title>
+</head>
+<body>
+    <div class="quiz_back">
+
+        <div class="quiz_all">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="quiz_header">
+
+                <div class="Header">Quiz list</div>
+                <div class="progress_bar">
+                    <div class="progress_bar_linear"></div>
+                </div>
+            </div>
+
+            <div class="quiz_question" id="quiz_1">
+                <div class="border_quiz">
+                <div class="question">Вопрос 1</div>
+                </div>
+
+                <ul class="quiz_list" id="quiz_answer">
+                    <label>
+                    <li class="quiz_option">
+
+                            <input type="radio" class="input_text" name="answer">
+                            <p>Ответ 1</p>
+                    </li>
+                    </label>
+
+                    <label>
+                         <li class="quiz_option">
+
+                                <input type="radio" name="answer">
+                                <p>Ответ 2</p>
+                         </li>
+                    </label>
+                </ul>
+
+            </div>
+
+            <div class="quiz_footer">
+                <div class="quiz_total">1/2</div>
+                <button class="quiz_next_button" id="next_button">Следующий вопрос</button>
+            </div>
+        </div>
+    </div>
+<script src="quiz.js"></script>
+</body>
+</html>
