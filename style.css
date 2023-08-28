@@ -45,10 +45,11 @@ body
 
 .progress_bar_linear
 {
-    width: 60%;
+
+    width: 25%;
     transition: 1s;
     height: 100%;
-    background: linear-gradient(270deg, transparent, #c40606, #24b419, #79da71);
+    background: linear-gradient(270deg, transparent,  #24b419, #79da71);
     animation: rotate5 1s linear infinite;
 }
 ul

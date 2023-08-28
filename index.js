@@ -1,4 +1,4 @@
-const question =
+const questions =
     [
         {
             question: "Когда я родился?",
@@ -11,17 +11,30 @@ const question =
             correct: 4,
         },
         {
-        question: "Где я родился?",
-        answer: ["Питер", "Усть-Илимск", "Россия", "Вьетнам"],
-        correct: 2,
-    }
+            question: "Где я родился?",
+            answer: ["Питер", "Усть-Илимск", "Россия", "Вьетнам"],
+            correct: 2,
+        }
     ];
 
-const questionList = document.querySelector('.question');
-const nxtBtn = document.querySelector('#next_button');
-const quizAnswer = document.querySelector('#quiz_answer');
-const quizTotal = document.querySelector('quiz_total')
+const questionList = document.querySelector('.question')
+const nxtBtn = document.querySelector('#next_button')
+const quizAnswer = document.querySelector('#quiz_answer')
+const quizTotal = document.querySelector('.quiz_total')
+const quizBar = document.querySelector('.progress_bar_linear')
 
+//Вывод ответов
+const questionTemplate =
+    ` 
+                <label>
+                     <li class="quiz_option">
+                         <input value="%number%" type="radio" class="input_text" name="answer">
+                         <p>%answer%</p>
+                     </li>
+                </label>
+            `
+
+const headerTemplate = `  <div class="question">%title%</div>`;
 let questionIndex = 0; // Текущий вопрос
 let score = 0; // Счет
 
@@ -30,43 +43,35 @@ showQuestion();
 nxtBtn.onclick = checkedBtn;
 
 
-function clearPage(){
-questionList.innerHTML = '';
-quizAnswer.innerHTML = '';
+function clearPage() {
+    questionList.innerHTML = '';
+    quizAnswer.innerHTML = '';
 }
-function showQuestion()
-{
-    // Вывод вопроса
-   const headerTemplate = `  <div class="question">%title%</div>`;
-   const title = headerTemplate.replace('%title%', question[questionIndex]['question']);
-   questionList.innerHTML = title;
 
+function showQuestion() {
+    calcProgresBar()
+    quizTotal.innerHTML = '%corrent/%last'
+        .replace('%corrent', questionIndex + 1)
+        .replace('%last', questions.length)
+    const question = questions[questionIndex];
+    questionList.innerHTML = headerTemplate.replace('%title%', question['question']);
+    question.answer.forEach((answer, idx) => {
+        const answerHTML = questionTemplate
+            .replace('%answer%', answer)
+            .replace('%number%', idx + 1);
+        quizAnswer.innerHTML += answerHTML;
+    })
 
-    let answerCorrect = 1;
-
-    for ([index, answerText] of question[questionIndex]['answer'].entries())
-    {
-        //Вывод ответов
-        const questionTemplate =
-            ` 
-                <label>
-                     <li class="quiz_option">
-                         <input value="%number%" type="radio" class="input_text" name="answer">
-                         <p>%answer%</p>
-                     </li>
-                </label>
-            `
-        const answer = questionTemplate
-                .replace('%answer%', answerText)
-                .replace('%number%', answerCorrect);
-        quizAnswer.innerHTML += answer;
-        answerCorrect++;
-    }
 
 }
 
-function checkedBtn()
+function calcProgresBar()
 {
+    const prozent = Math.ceil(((questionIndex + 1) / questions.length) * 100)
+    quizBar.style.width = prozent + '%'
+}
+
+function checkedBtn() {
     const checkedRadio = quizAnswer.querySelector('input:checked');
     if (checkedRadio)
         console.log('Все ок!')
@@ -76,27 +81,30 @@ function checkedBtn()
     //Проверяем ответ
     const userAnswer = parseInt(checkedRadio.value)
 
-    console.log(userAnswer, question[questionIndex]['correct']);
-    if (userAnswer === question[questionIndex]['correct'])
-    {
+    console.log(userAnswer, questions[questionIndex]['correct']);
+    if (userAnswer === questions[questionIndex]['correct']) {
         score++;
     }
 
-    if (questionIndex !== question.length - 1)
-    {
-    questionIndex++;
+    if (questionIndex !== questions.length - 1) {
+        questionIndex++;
 
-    clearPage();
-    showQuestion();
-    }
-    else
-    {
-    clearPage();
-    showResults();
+        clearPage();
+        showQuestion();
+    } else {
+        clearPage();
+        showResults();
     }
 }
 
-function showResults()
-{
-console.log(score);
+function showResults() {
+    console.log(score);
 }
+
+
+
+
+
+
+
+
