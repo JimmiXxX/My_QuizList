@@ -49,6 +49,13 @@ const questionTemplate =
                 </label>
             `
 
+const resultTemplate =
+    `
+    <div class="quiz_list">%title%</div>
+    <div class="quiz_list">%message%</div>
+    <div class="quiz_list">%result%</div>
+`
+
 const headerTemplate = `  <div class="question">%title%</div>`;
 let questionIndex = 0; // Текущий вопрос
 let score = 0; // Счет
@@ -112,8 +119,26 @@ function checkedBtn() {
     }
 }
 
+
 function showResults() {
     console.log(score);
+    let title, message
+
+    if (score === questions.length)
+    {
+        title = 'Отлично!'
+        message = 'Все ответы правильные'
+    }else if((score * 100)/questions.length >=50)
+    {
+        title = 'Неплохой результат'
+        message = 'Вы ответили более 50% правильно!'
+    }else if((score * 100)/questions.length <= 30)
+    {
+        title = 'Стоит лучше меня узнать'
+        message = 'Ответов меньше 30%(('
+    }
+
+    let result = `${score} из ${questions.length}`
 }
 
 
