@@ -126,7 +126,7 @@ function showResults() {
 
     if (score === questions.length)
     {
-        title = 'Отлично!'
+        title = 'Great!'
         message = 'Все ответы правильные'
     }else if((score * 100)/questions.length >=50)
     {
